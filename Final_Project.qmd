@@ -1,11 +1,16 @@
 ---
 title: "Final_Project"
 author: "Rachel Bittner"
-format: html
+format: 
+  html:
+    self-contained: true
+output-file: index.html
+output-dir: docs
 editor: visual
 ---
 
 ## GitHub Repo:
+
 https://github.com/bittnation/ENVS_193DS_Final
 
 ```{r packages-read}
@@ -19,7 +24,6 @@ library(dplyr)
 
 # read in data sets
 ```
-
 
 ## Running Code
 
