@@ -9,9 +9,10 @@ ENVS 193 DS final project
 
 ## General Information
 
-This repository contains personal data collected for ENVS 193DS, Homework 03, including daily records of productivity, caffeine intake, sleep, and location over the course of the quarter. The purpose of this project is to explore and visualize personal behavioral patterns using descriptive statistics and affective visualization techniques.
+This repository contains my responses to Problems 1-4 of 
+the ENVS 193DS Spring Final, demonstrating my ability to apply all the skill learned throughout the quarter. I demonstrated my ability to analyze, identify gap, and fill those gaps in statistical communication. I also demonstrated my ability to clean, summarize, and visualize a data set. Additionally, I demonstrated by ability to understand and analyze data collected by others. Finally I demonstrated my ability to communicate by visulazations and provide feedback to others.
 
-This project demonstrates basic data wrangling, summarizing and visualization using R.
+
 
 ---
 
@@ -19,28 +20,32 @@ This project demonstrates basic data wrangling, summarizing and visualization us
 
 
 ```r
-library(tidyverse)   # for data manipulation and ggplot2
-library(here)        # for file paths
-library(janitor)     # for cleaning variable names
-library(flextable)   # for formatted summary tables
-library(dplyr)       # for data manipulation
+library(tidyverse) #general
+library(janitor) #cleaning data 
+library(ggplot2) #making plots
+library(dplyr) #for summerizing data
+library(DHARMa) #checking diagnostics
+library(MuMIn) #using Akalie's Info. Criterion
+library(ggeffects) #model predictions
+library(gtsummary) #display summary tables
 ```
 ---
 
 ## Data and file information
 
 .
-├── ENVS-193DS_homework=03.Rproj         # RStudio project file
+├── 193 DS Final.Rproj         # RStudio project file
 ├── README.md                            
 ├── code/                                # Code folder
-│   ├── homework-03.qmd                  # Quarto file with analysis and narrative
-│   └── homework-03.html                 # Rendered HTML output
+│   ├── Final_Project.qmd                  # Quarto file with analysis and narrative
+│   └── Final_Project.html                 # Rendered HTML output
 ├── data/                                # Data folder
-│   └── personal_data_1.csv              # personal data set
-├── images/                              # Images folder
-│   ├── DS Visualization.png             # visualization
-│   ├── critique-figure.png              # figure I critiqued
-│   └── IMG_1025.jpeg                    # visualization draft
+│   ├── occdist.csv             # nest boxes data
+│   ├── SST_SB.csv              # sea surface temp. data
+set
+├── docs/                              # docs folder
+│   ├── index.html              # rendered html
+
 
   
 ---
