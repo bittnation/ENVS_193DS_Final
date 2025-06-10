@@ -9,10 +9,9 @@ output-dir: docs
 editor: visual
 ---
 
-## GitHub Repo:
+#GitHub Repo:
 
 https://github.com/bittnation/ENVS_193DS_Final
-
 
 ```{r packages-read}
 
@@ -24,6 +23,7 @@ library(dplyr)
 library(DHARMa) #checking diagnostics
 library(MuMIn) #using Akalie's Info. Criterion
 library(ggeffects) #model predictions
+library(gtsummary) #viewing gt summary tables
 #reading in other necessary packages
 
 # read in data sets
@@ -34,14 +34,11 @@ nest_boxes <- read.csv("Data/occdist.csv")
 
 # Problem 1. Research Writing
 
-a. In part 1, they used Pearson's correlation. The key word "correlation" suggest that they either performed a Pearson's correlation test or Spearman's rho. Since kg year-1 and km are both continuous variables instead of rankings it is likely Pearson's r. In part 2, they used a one-way ANOVA. The key phrase "difference in average" indicates ANOVA which aims to compare the means (averages) of more than one group. The type of ANOVA was determined by the number of groups, the results indicated the comparison of more than three groups which requires a one-way ANOVA. 
+a.  In part 1, they used Pearson's correlation. The key word "correlation" suggest that they either performed a Pearson's correlation test or Spearman's rho. Since kg year-1 and km are both continuous variables instead of rankings it is likely Pearson's r. In part 2, they used a one-way ANOVA. The key phrase "difference in average" indicates ANOVA which aims to compare the means (averages) of more than one group. The type of ANOVA was determined by the number of groups, the results indicated the comparison of more than three groups which requires a one-way ANOVA.
 
+b.  To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors. Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptical (fix tense), the p-value doesn't tell the whole story so it is important to communicate all statistical results.
 
-b. To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors. Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptical (fix tense), the p-value doesn't tell the whole story so it is important to communicate all statistical results. 
-
-c. ANOVA statistics: 
-We found that there was a significant difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands) (one-way ANOVa, F(df among groups, df withing groups),p = 0.02, a = significance level). Tukey's HSD: On Average, urban land tended to have [higher or lower] nitrogen loads (kg year-1) than grasslands ( _ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1) and fertilizer (_ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1 )...
-
+c.  ANOVA statistics: We found that there was a significant difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands) (one-way ANOVa, F(df among groups, df withing groups),p = 0.02, α = significance level). Tukey's HSD: On Average, urban land tended to have \[higher or lower\] nitrogen loads (kg year-1) than grasslands ( \_ kg year-1 (higher or lower), \_ % CI: \[x:y\] kg year-1) and fertilizer (\_ kg year-1 (higher or lower), \_ % CI: \[x:y\] kg year-1 )...
 
 # Problem 2. Data Visualization
 
@@ -69,7 +66,6 @@ sst_clean |> #displaying 5 random rows of cleaned data
 str(sst_clean) #displaying table
 ```
 
-
 ```{r summarize-sst}
 #create summary data set using clean data
 
@@ -94,7 +90,7 @@ str(sst_summary)
 
 ```
 
-b. 
+b.  
 
 ```{r visulaization}
 # creating plot using cleaned sst data set
@@ -132,22 +128,23 @@ sst_plot # view plot
 
 # Problem 3. Data Analysis
 
-a. The "1's" and "0's" in this data set represent occupancy of nest boxes. If "sp" is 1, that indicates that the box is occupied by swift parrots, if not occupied or occupied by a non target species"sp" is 0. Of the four occupation options: "sp", "cs", "e", and "tm" each box will only have one "1" and the other three will be "0's"
+a.  The "1's" and "0's" in this data set represent occupancy of nest boxes. If "sp" is 1, that indicates that the box is occupied by swift parrots, if not occupied or occupied by a non target species"sp" is 0. Of the four occupation options: "sp", "cs", "e", and "tm" each box will only have one "1" and the other three will be "0's"
 
-b. In the context of this study the main difference between Swift Parrots and the other species, Common Starling and Tree Martin, is that Swift Parrots are critically endangered making them at risk to extinction. Providing a safe place to facilitate and encourage the successful breeding on Swift Parrots could be crucial in helping the species population recover.
+b.  In the context of this study the main difference between Swift Parrots and the other species, Common Starling and Tree Martin, is that Swift Parrots are critically endangered making them at risk to extinction. Providing a safe place to facilitate and encourage the successful breeding on Swift Parrots could be crucial in helping the species population recover.
 
-c. Defining the year as seasons is important in the context of this study because... explain how they differ in the context of this study (trends??) 
+c.  Defining the year as seasons is important in the context of this study because... explain how they differ in the context of this study (trends??)
 
-d. 
+d.  
 
-| Model number | Season | Distance to forest edge | Description                    |  
-|:------------:|:------:|:-----------------------:|:------------------------------:| 
-| 0            |        |                         | No predictors (null model)     |
-| 1            |  X     |            X            | Season, Distance to forest edge| 
-| 2            |  X     |                         | Season                         |   
-| 3            |        |            X            | Distance to forest edge        |   
+| Model number | Season | Distance to forest edge |           Description           |
+|:------------:|:------------:|:-----------------:|:-----------------------:|
+|      0       |        |                         |   No predictors (null model)    |
+|      1       |   X    |            X            | Season, Distance to forest edge |
+|      2       |   X    |                         |             Season              |
+|      3       |        |            X            |     Distance to forest edge     |
 
-e. 
+e.  
+
 ```{r clean-nest}
 #remove all data that is not used in model predictions
 nest_boxes_clean <- nest_boxes |>
@@ -156,7 +153,6 @@ nest_boxes_clean <- nest_boxes |>
 select(!c(box, box_occupant, event_id,repeated_use))
 
 ```
-
 
 ```{r model-fitting}
 # model 0: null model
@@ -181,7 +177,8 @@ model3 <- lm(
 
 ```
 
-f.
+f.  
+
 ```{r diagnotic-check}
 
 par(mfrow = c(2,2))
@@ -192,7 +189,7 @@ plot(model3)
 
 ```
 
-g. The best model as determined by Akaike’s Information Criterion (AIC), selecting the saturated model predicting both edge distance and season as strong predictors of Swift Parrot presence in nest boxes. 
+g.  The best model as determined by Akaike’s Information Criterion (AIC), selecting the saturated model predicting both edge distance and season as strong predictors of Swift Parrot presence in nest boxes.
 
 ```{r select-model}
 
@@ -202,13 +199,10 @@ AICc(model0,
      model3) |> 
   # arranging output in descending order of AIC
   arrange(AICc)
-
-
 ```
 
+h.  
 
-
-h.
 ```{r model-predictions}
 model1_predictions <- ggpredict(
   model1, # model object
@@ -222,13 +216,11 @@ model1_predictions <- ggpredict(
  #viewing new predictions data set
 ```
 
-
 ```{r}
 nest_boxes_clean$season <- as.factor(nest_boxes_clean$season)
 model1_predictions$season <- as.factor(model1_predictions$season)
 
 ```
-
 
 ```{r visualize-predictions}
 #| fig-width: 12
@@ -270,17 +262,36 @@ ggplot(data = nest_boxes_clean,
   theme(panel.grid = element_blank())
 ```
 
-i. Figure 1. Predicted Distance to Forest Edge by Season
-Model-predicted nest box distances to forest edge for occupied (1) and unoccupied (0) boxes in 2016 and 2019. Points show observations; dark points are predictions with 95% confidence intervals (not visible due to narrow width). Data Source: Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
-
-j.
-k.
+i.  Figure 1. Predicted Distance to Forest Edge by Season Model-predicted nest box distances to forest edge for occupied (1) and unoccupied (0) boxes in 2016 and 2019. Points show observations; dark points are predictions with 95% confidence intervals (not visible due to narrow width). Data Source: Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird \[Dataset\]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
 
 
+j. 
+```{r}
+#writing model that predicts occupancy based on edge for each season
+nest_ocup_mod <- glm(sp ~ edge_distance + season,
+                     data = nest_boxes_clean,
+                     family = binomial)
+#plotting residuals to look at diagnostics and asses model fit 
+plot(simulateResiduals(nest_ocup_mod))
 
-<!-- updated for deployment -->
+#displaying summary output to look at model coefficients
+summary(nest_ocup_mod)
+
+#creating regression table to interpret odds ratio
+gtsummary ::tbl_regression(nest_ocup_mod,
+                           exponentiate = TRUE)
+
+# predicting probability of occupancy from forest edge (0m) to 900m from forest edge
+ggpredict(nest_ocup_mod,
+          terms = c("edge_distance [0,900]", "season"))
+
+```
+
+k. Swift Parrots tend to occupy nest boxes more frequently when those boxes are located closer to the forest edge (see model summary table, part h; and predicted values, part j). With each 1-meter increase in distance from the forest edge, the odds of nest box occupancy decrease (OR = 1.0, 95% CI: [1.00, 1.00], p < 0.001 , α = 0.05). At the forest edge (0 m), the probability of occupancy is higher in both seasons, with predicted probabilities of 0.48 (95% CI:[0.33, 0.64]) in 2016 and 0.30 (95% CI:[0.18, 0.44]) in 2019. At 900 m from the forest edge, occupancy probabilities decrease substantially to 0.12 (95% CI:[0.06, 0.24]) in 2016 and 0.06 (95% CI:[0.03, 0.13]) in 2019. This trend suggest that Swift Parrots’ have a preference for edge habitat, this could be due to factors like food and resource availability. 
+
 # Problem 4. Affective and Exploratopry Visualizations
 
-
+a.
+b. 
 
 
