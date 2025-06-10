@@ -124,6 +124,7 @@ values = c(
 sst_plot # view plot
 ```
 
+<!-- updated for deployment -->
 
 # Problem 3. Data Analysis
 
