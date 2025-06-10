@@ -291,7 +291,15 @@ k. Swift Parrots tend to occupy nest boxes more frequently when those boxes are 
 
 # Problem 4. Affective and Exploratopry Visualizations
 
-a.
-b. 
+a.The way that the visualizations represent my data is very different. The exploratory visualizations from homework 2 were very simple, just a basic bar graph and linear regression. My affective visualization from homework 3 is a less obvious display of data, it is not interpret-able at first glance like my effective visualizations despite the data showing the same trends.
+
+The biggest similarity between my visualizations are the tends in data the trends visualized in my affective visualization are the same trends represented in my exploratory visualizations.
+
+The pattern of higher caffeine intake leading to higher productivity is displayed in both visualizations, along with the pattern of more hours of productivity in the library than at home. The only major differences is an increase in variables, my visualizations from homework 2 did not contain any observations from the "lab" category, but my affective visualization had lots of observations from the "lab" category showing trends of high productivity.
+
+
+Some of the feedback that I got during the week 9 workshop was....
+
+b. I attended section on week 10 and shared my affective visualization. 
 
 
