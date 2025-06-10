@@ -87,7 +87,7 @@ sst_summary <- sst_clean |>
 #summarize mean sst
   summarize(
     mean_monthly_sst = mean(temp),
-    .groups = "drop" #removing extra info for stucture
+    .groups = "drop" #removing extra info for structure
     )
 sst_summary #display summary
 str(sst_summary)
