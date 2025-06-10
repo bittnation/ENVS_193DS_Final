@@ -13,6 +13,12 @@ editor: visual
 
 https://github.com/bittnation/ENVS_193DS_Final
 
+
+```{r}
+list.files()
+```
+
+
 ```{r packages-read}
 
 library(tidyverse)
@@ -23,38 +29,78 @@ library(dplyr)
 
 
 # read in data sets
+sst <- read.csv("Data/SST_SB.csv")
+
 ```
 
 # Problem 1. Research Writing
 
-a. 
+a. In part 1, they used Pearson's correlation. The key word "correlation" suggest that they either performed a Pearson's correlation test or Spearman's rho. Since kg year-1 and km are both continuous variables instead of rankings it is likely Pearson's r. In part 2, they used a one-way ANOVA. The key phrase "difference in average" indicates ANOVA which aims to compare the means (averages) of more than one group. The type of ANOVA was determined by the number of groups, the results indicated the comparison of more than three groups which requires a one-way ANOVA. 
 
-In part 1, they used Pearson's correlation. The key word "correlation" suggest that they either performed a Pearson's correlation test or Spearman's rho. Since kg year-1 and km are both continuous variables instead of rankings it is likely Pearson's r. 
+
+b. To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors. Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptical (fix tense), the p-value doesn't tell the whole story so it is important to communicate all statistical results. 
+
+c. ANOVA statistics: 
+We found that there was a significant difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands) (one-way ANOVa, F(df among groups, df withing groups),p = 0.02, a = significance level). Tukey's HSD: On Average, urban land tended to have [higher or lower] nitrogen loads (kg year-1) than grasslands ( _ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1) and fertilizer (_ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1 )...
+
+
+# Problem 2. Data Visualization
+
+```{r clean-sst}
+
+sst_clean <- sst |>
+  clean_names() |> #cleans column names
+  mutate(
+    date = ymd(date),
+    year = year(date),
+    month = month(date, label = TRUE, abbr = TRUE)
+          ) |> #making a separate column with just the year and another with just the month (month is converted from numeric to abbreviated version)
+  
+ #filter to only include data from years of interst
+
+ filter(year %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |>
+
+
+ # remove date (ymd) format, site, latitude, longitude, 
  
+select(!c(date, site, latitude, longitude))
 
-In part 2, they used a one-way ANOVA. The key phrase "difference in average" indicates ANOVA which aims to compare the means (averages) of more than one group. The type of ANOVA was determined by the number of groups, the results indicated the comparison of more than three groups which requires a one-way ANOVA. 
+sst_clean |> #displaying 5 random rows of cleaned data
+  slice_sample(n = 5)
+str(sst_clean) #displaying table
+```
+
+```{r summarize-sst}
+#create summary data set using clean data
+
+sst_summary <- sst_clean |> 
+#group so that we can find the months mean in its individual year
+  group_by(year, month) |>
+# re order data  
+    mutate(month = as_factor(month),
+         month = fct_relevel(
+           month, 
+           "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+         ) |> #months in correct calender order
+  mutate(year = as_factor(year)) |> #making data categorical instead of numerical
+  
+#summarize mean sst
+  summarize(
+    mean_monthly_sst = mean(temp),
+    .groups = "drop" #removing extra info for stucture
+    )
+sst_summary #display summary
+str(sst_summary)
+
+```
+
+```{r}
+levels(sst_clean$month)
+
+```
 
 
-b. 
-
-To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. 
-
-It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors.
-
-
-Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptical (fix tense), the p-value doesn't tell the whole story so it is important to communicate all statistical results. 
-
-c. 
-ANOVA statistics: 
-We found that there was a significant difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands) (one-way ANOVa, F(df among groups, df withing groups),p = 0.02, a = significance level).
-
-Tukey's HSD:
-On Average, urban land tended to have [higher or lower] nitrogen loads (kg year-1) than grasslands ( _ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1) and fertilizer (_ kg year-1 (higher or lower), _ % CI: [x:y] kg year-1 )...
-
-
-# Problem 2. Research Writing
-
-# Problem 3. Data Visualization
+# Problem 3. Data Analysis
 
 # Problem 4. Affective and Exploratopry Visualizations
 
