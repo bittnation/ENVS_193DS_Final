@@ -14,11 +14,6 @@ editor: visual
 https://github.com/bittnation/ENVS_193DS_Final
 
 
-```{r}
-list.files()
-```
-
-
 ```{r packages-read}
 
 library(tidyverse)
@@ -105,19 +100,18 @@ sst_plot <- ggplot(data = sst_summary,
        color = year, #coloring by year
        group = year #connecting lines between groups
    )) + 
-  geom_point(size =0.5) +
-  geom_line()+
-  labs(
+  geom_point(size =0.5) + #setting point size
+  geom_line()+ #line plot
+  labs( #labels
     x = "Month",
     y = "Mean Monthy sea surafec temperature (°C)",
-    color = "Year"
+    color = "Year" #labeling legend
   ) +
-  theme_classic() +
-  theme(legend.position = c(0.05, 0.95),         # position inside plot (x, y)
-  legend.justification = c(0, 1),          # anchor legend’s top-left corner
-  # optional for visibility
-  legend.key.size = unit(0.25, "cm"),
-  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)) +
+  theme_classic() + #setting classic theme
+  theme(legend.position = c(0.05, 0.95), # position inside plot
+  legend.justification = c(0, 1),# position legend in top-left corner
+  legend.key.size = unit(0.25, "cm"), #making legend visable
+  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)) + #creating pannel boarder
 scale_color_manual(
 values = c(
 "2018" = "#E6C8F0",
@@ -126,9 +120,8 @@ values = c(
 "2021" = "#7E2C9E",
 "2022" = "#5E1675",
 "2023" = "#3E065F"
-)) 
-
-sst_plot
+)) #coloring lines from light to dark
+sst_plot # view plot
 ```
 
 
