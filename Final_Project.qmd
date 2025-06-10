@@ -70,6 +70,7 @@ sst_clean |> #displaying 5 random rows of cleaned data
 str(sst_clean) #displaying table
 ```
 
+
 ```{r summarize-sst}
 #create summary data set using clean data
 
@@ -94,9 +95,40 @@ str(sst_summary)
 
 ```
 
-```{r}
-levels(sst_clean$month)
+b. 
 
+```{r}
+# creating plot using cleaned sst data set
+sst_plot <- ggplot(data = sst_summary,
+   aes(x = month, #setting month as x-axis
+       y = mean_monthly_sst, #setting mean sst on y-axis
+       color = year, #coloring by year
+       group = year #connecting lines between groups
+   )) + 
+  geom_point(size =0.5) +
+  geom_line()+
+  labs(
+    x = "Month",
+    y = "Mean Monthy sea surafec temperature (°C)",
+    color = "Year"
+  ) +
+  theme_classic() +
+  theme(legend.position = c(0.05, 0.95),         # position inside plot (x, y)
+  legend.justification = c(0, 1),          # anchor legend’s top-left corner
+  # optional for visibility
+  legend.key.size = unit(0.25, "cm"),
+  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)) +
+scale_color_manual(
+values = c(
+"2018" = "#E6C8F0",
+"2019" = "#C989E5",
+"2020" = "#A44FCF",
+"2021" = "#7E2C9E",
+"2022" = "#5E1675",
+"2023" = "#3E065F"
+)) 
+
+sst_plot
 ```
 
 
