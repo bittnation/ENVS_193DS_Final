@@ -21,11 +21,13 @@ library(janitor)
 library(ggplot2)
 library(dplyr)
 # reading in basic packages
-
+library(DHARMa)
+#reading in other necessary packages
 
 # read in data sets
 sst <- read.csv("Data/SST_SB.csv")
 
+nest_boxes <- read.csv("Data/occdist.csv")
 ```
 
 # Problem 1. Research Writing
@@ -92,7 +94,7 @@ str(sst_summary)
 
 b. 
 
-```{r}
+```{r visulaization}
 # creating plot using cleaned sst data set
 sst_plot <- ggplot(data = sst_summary,
    aes(x = month, #setting month as x-axis
@@ -111,7 +113,7 @@ sst_plot <- ggplot(data = sst_summary,
   theme(legend.position = c(0.05, 0.95), # position inside plot
   legend.justification = c(0, 1),# position legend in top-left corner
   legend.key.size = unit(0.25, "cm"), #making legend visable
-  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)) + #creating pannel boarder
+  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)) + #creating panel boarder
 scale_color_manual(
 values = c(
 "2018" = "#E6C8F0",
@@ -127,6 +129,78 @@ sst_plot # view plot
 <!-- updated for deployment -->
 
 # Problem 3. Data Analysis
+
+a. The "1's" and "0's" in this data set represent occupancy of nest boxes. If "sp" is 1, that indicates that the box is occupied by swift parrots, if not occupied or occupied by a non target species"sp" is 0. Of the four occupation options: "sp", "cs", "e", and "tm" each box will only have one "1" and the other three will be "0's"
+
+b. In the context of this study the main difference between Swift Parrots and the other species, Common Starling and Tree Martin, is that Swift Parrots are critically endangered making them at risk to extinction. Providing a safe place to facilitate and encourage the successful breeding on Swift Parrots could be crucial in helping the species population recover.
+
+c. Defining the year as seasons is important in the context of this study because... explain how they differ in the context of this study (trends??) 
+
+d. 
+
+| Model number | Season | Distance to forest edge | Description                    |  
+|:------------:|:------:|:-----------------------:|:------------------------------:| 
+| 0            |        |                         | No predictors (null model)     |
+| 1            |  X     |            X            | Season, Distance to forest edge| 
+| 2            |  X     |                         | Season                         |   
+| 3            |        |            X            | Distance to forest edge        |   
+
+e. 
+```{r clean-nest}
+#remove all data that is not used in model predictions
+nest_boxes_clean <- nest_boxes |>
+    clean_names() |> #replacing spaces with underscores
+#remove box, box occupant, event ID, and, repeated use
+select(!c(box, box_occupant, event_id,repeated_use))
+
+```
+
+
+```{r model-fitting}
+# model 0: null model
+model0 <- lm(
+  sp ~ 1, # presence of sp as response variable  
+  data = nest_boxes_clean) # data frame)
+
+# model 1: all predictors
+model1 <- lm(
+  sp ~ edge_distance + season, # edge distance and season as predictor
+  data = nest_boxes_clean )# data frame)
+
+# model 2: Season
+model2 <- lm(
+  sp ~ season,#season as predictor
+  data = nest_boxes_clean)
+
+# model 3: Distance to forest edge
+model3 <- lm(
+  sp ~ edge_distance, #edge distance as predictor
+  data = nest_boxes_clean)
+
+```
+
+f.
+```{r diagnotic-check}
+
+par(mfrow = c(2,2))
+plot(model0)
+plot(model1)
+plot(model2)
+plot(model3)
+
+```
+
+
+
+
+g.
+h.
+i.
+j.
+k.
+
+
+
 
 # Problem 4. Affective and Exploratopry Visualizations
 
