@@ -1,8 +1,12 @@
 ---
 title: "Final_Project"
 author: "Rachel Bittner"
+date: 06-11-2025
 format: 
   html:
+    toc: true
+    toc-location: right
+    toc-floating: true
     self-contained: true
 output-file: index.html
 output-dir: docs
