@@ -13,7 +13,7 @@ editor: visual
 
 https://github.com/bittnation/ENVS_193DS_Final
 
-```{r packages-read}
+```{r message=FALSE}
 
 library(tidyverse) #general
 library(janitor) #cleaning data 
@@ -36,7 +36,7 @@ nest_boxes <- read.csv("Data/occdist.csv")
 
 a.  In part 1, they used Pearson's correlation. The key word "correlation" suggest that they either performed a Pearson's correlation test or Spearman's rho. Since kg year-1 and km are both continuous variables instead of rankings it is likely Pearson's r. In part 2, they used a one-way ANOVA. The key phrase "difference in average" indicates ANOVA which aims to compare the means (averages) of more than one group. The type of ANOVA was determined by the number of groups, the results indicated the comparison of more than three groups which requires a one-way ANOVA.
 
-b.  To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors. Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptical (fix tense), the p-value doesn't tell the whole story so it is important to communicate all statistical results.
+b.  To add more context to the results, my coworker should provide a Tukey's Honestly significant Difference and key ANOVA statistics. It is important to include Tukey's HSD because it provides context as to which of the 6 groups were actually different from each other. This is test is important because it prevents Type I errors. Include key ANOVA statistics such as test type, F-value, degrees of freedom, and significance level to strengthen the statistical results. It aids readers ability to interpret data and draw conclusions and it promotes transparency and reduces skeptism, the p-value doesn't tell the whole story so it is important to communicate all statistical results.
 
 c.  ANOVA statistics: We found that there was a significant difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands) (one-way ANOVa, F(df among groups, df withing groups),p = 0.02, α = significance level). Tukey's HSD: On Average, urban land tended to have \[higher or lower\] nitrogen loads (kg year-1) than grasslands ( \_ kg year-1 (higher or lower), \_ % CI: \[x:y\] kg year-1) and fertilizer (\_ kg year-1 (higher or lower), \_ % CI: \[x:y\] kg year-1 )...
 
@@ -92,7 +92,7 @@ str(sst_summary)
 
 b.  
 
-```{r visulaization}
+```{r warning=FALSE}
 # creating plot using cleaned sst data set
 sst_plot <- ggplot(data = sst_summary,
    aes(x = month, #setting month as x-axis
@@ -104,7 +104,7 @@ sst_plot <- ggplot(data = sst_summary,
   geom_line()+ #line plot
   labs( #labels
     x = "Month",
-    y = "Mean Monthy sea surafec temperature (°C)",
+    y = "Mean Monthly sea surafec temperature (°C)",
     color = "Year" #labeling legend
   ) +
   theme_classic() + #setting classic theme
@@ -132,7 +132,8 @@ a.  The "1's" and "0's" in this data set represent occupancy of nest boxes. If "
 
 b.  In the context of this study the main difference between Swift Parrots and the other species, Common Starling and Tree Martin, is that Swift Parrots are critically endangered making them at risk to extinction. Providing a safe place to facilitate and encourage the successful breeding on Swift Parrots could be crucial in helping the species population recover.
 
-c.  Defining the year as seasons is important in the context of this study because... explain how they differ in the context of this study (trends??)
+c.  Defining the year as seasons is important in the context of this study because when the boxes were initially installed in 2016 there were no previous occupant therefore there were more open boxes. However in 2019 many boxes were already occupied by non-target species when Swift Parrots arrive for mating season. 
+
 
 d.  
 
@@ -177,7 +178,7 @@ model3 <- lm(
 
 ```
 
-f.  
+f.
 
 ```{r diagnotic-check}
 
@@ -262,11 +263,11 @@ ggplot(data = nest_boxes_clean,
   theme(panel.grid = element_blank())
 ```
 
-i.  Figure 1. Predicted Distance to Forest Edge by Season Model-predicted nest box distances to forest edge for occupied (1) and unoccupied (0) boxes in 2016 and 2019. Points show observations; dark points are predictions with 95% confidence intervals (not visible due to narrow width). Data Source: Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird \[Dataset\]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
+i.  Figure 1. Predicted Distance to Forest Edge by Season: Model-predicted nest box distances to forest edge for occupied (1) and unoccupied (0) boxes in 2016 and 2019. Points show observations colored by year; dark points are predictions with 95% confidence intervals (not visible due to narrow width). Data Source: Stojanovic, Dejan et al. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird \[Dataset\]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
 
 
 j. 
-```{r}
+```{r message=FALSE}
 #writing model that predicts occupancy based on edge for each season
 nest_ocup_mod <- glm(sp ~ edge_distance + season,
                      data = nest_boxes_clean,
@@ -287,19 +288,15 @@ ggpredict(nest_ocup_mod,
 
 ```
 
-k. Swift Parrots tend to occupy nest boxes more frequently when those boxes are located closer to the forest edge (see model summary table, part h; and predicted values, part j). With each 1-meter increase in distance from the forest edge, the odds of nest box occupancy decrease (OR = 1.0, 95% CI: [1.00, 1.00], p < 0.001 , α = 0.05). At the forest edge (0 m), the probability of occupancy is higher in both seasons, with predicted probabilities of 0.48 (95% CI:[0.33, 0.64]) in 2016 and 0.30 (95% CI:[0.18, 0.44]) in 2019. At 900 m from the forest edge, occupancy probabilities decrease substantially to 0.12 (95% CI:[0.06, 0.24]) in 2016 and 0.06 (95% CI:[0.03, 0.13]) in 2019. This trend suggest that Swift Parrots’ have a preference for edge habitat, this could be due to factors like food and resource availability. 
+k.  Swift Parrots tend to occupy nest boxes more frequently when those boxes are located closer to the forest edge (see model summary table, part h; and predicted values, part j). With each 1-meter increase in distance from the forest edge, the odds of nest box occupancy decrease (OR = 1.0, 95% CI: [1.00, 1.00], p < 0.001 , α = 0.05). At the forest edge (0 m), the probability of occupancy is higher in both seasons, with predicted probabilities of 0.48 (95% CI:[0.33, 0.64]) in 2016 and 0.30 (95% CI:[0.18, 0.44]) in 2019. At 900 m from the forest edge, occupancy probabilities decrease substantially to 0.12 (95% CI:[0.06, 0.24]) in 2016 and 0.06 (95% CI:[0.03, 0.13]) in 2019. This trend suggest that Swift Parrots’ have a preference for edge habitat, this could be due to factors like food and resource availability. 
 
 # Problem 4. Affective and Exploratopry Visualizations
 
-a.The way that the visualizations represent my data is very different. The exploratory visualizations from homework 2 were very simple, just a basic bar graph and linear regression. My affective visualization from homework 3 is a less obvious display of data, it is not interpret-able at first glance like my effective visualizations despite the data showing the same trends.
+a.  The way that the visualizations represent my data is very different. The exploratory visualizations from homework 2 were very simple, just a basic bar graph and linear regression. My affective visualization from homework 3 is a less obvious display of data, it is not interpret-able at first glance like my effective visualizations despite the data showing the same trends.
+  The biggest similarity between my visualizations are the tends in data the trends visualized in my affective visualization are the same trends represented in my exploratory visualizations.
+  The pattern of higher caffeine intake leading to higher productivity is displayed in both visualizations, along with the pattern of more hours of productivity in the library than at home. The only major differences is an increase in variables, my visualizations from homework 2 did not contain any observations from the "lab" category, but my affective visualization had lots of observations from the "lab" category showing trends of high productivity.
+  Some of the feedback that I got during the week 9 workshop was to create an ombre effect with my colors that signify caffeine consumption. I attempted to apply this feedback, however since darker colors tend to be longer and lighter colors tend to be longer the data visualization no longer fit the screen in an asymmetric way and no longer showed the variation within my weeks so I decided not to implement this change.
 
-The biggest similarity between my visualizations are the tends in data the trends visualized in my affective visualization are the same trends represented in my exploratory visualizations.
-
-The pattern of higher caffeine intake leading to higher productivity is displayed in both visualizations, along with the pattern of more hours of productivity in the library than at home. The only major differences is an increase in variables, my visualizations from homework 2 did not contain any observations from the "lab" category, but my affective visualization had lots of observations from the "lab" category showing trends of high productivity.
-
-
-Some of the feedback that I got during the week 9 workshop was....
-
-b. I attended section on week 10 and shared my affective visualization. 
+b.  I attended section on week 10 and shared my affective visualization. 
 
 

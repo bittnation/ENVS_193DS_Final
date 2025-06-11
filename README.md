@@ -10,7 +10,7 @@ ENVS 193 DS final project
 ## General Information
 
 This repository contains my responses to Problems 1-4 of 
-the ENVS 193DS Spring Final, demonstrating my ability to apply all the skill learned throughout the quarter. I demonstrated my ability to analyze, identify gap, and fill those gaps in statistical communication. I also demonstrated my ability to clean, summarize, and visualize a data set. Additionally, I demonstrated by ability to understand and analyze data collected by others. Finally I demonstrated my ability to communicate by visulazations and provide feedback to others.
+the ENVS 193DS Spring Final, demonstrating my ability to apply all the skill learned throughout the quarter. I demonstrated my ability to analyze, identify gap, and fill those gaps in statistical communication. I also demonstrated my ability to clean, summarize, and visualize a data set. Additionally, I demonstrated by ability to understand and analyze data collected by others. Finally I demonstrated my ability to communicate by visualizations and provide feedback to others.
 
 
 
